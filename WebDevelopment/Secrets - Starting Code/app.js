@@ -44,6 +44,36 @@ app.post("/register", function(req,res){
     res.render("secrets")
 });
 
+// check if we have user created and login
+app.post("/login", function(req,res){
+    const username = req.body.username;
+    const password = req.body.password;
+
+    async function runFindUser(){
+        const foundUser = await User.findOne({email: username});
+
+        if (foundUser.password === password){
+            res.render("secrets");
+        }
+    }
+
+    runFindUser().catch(console.dir);
+
+    // ============================================ deprecated
+
+    // User.findOne({email: username},function(err,foundUser){
+    //     if(err){
+    //         console.log(err);
+    //     } else {
+    //         if (foundUser) {
+    //             if (foundUser.password === password){
+    //                 res.render("secrets");
+    //             }
+    //         }
+    //     }
+    // })
+
+});
 
 
 
