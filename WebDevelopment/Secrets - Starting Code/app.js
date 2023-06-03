@@ -33,6 +33,7 @@ app.get("/register",function(req,res){
     res.render("register");
 });
 
+// register an user and render page if registered successfully
 app.post("/register", function(req,res){
     const newUser = new User({
         email: req.body.username,
@@ -40,7 +41,9 @@ app.post("/register", function(req,res){
     });
 
     newUser.save();
+    res.render("secrets")
 });
+
 
 
 
